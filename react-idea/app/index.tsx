@@ -1,6 +1,6 @@
 // app/home.tsx
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 
 export default function Home() {
@@ -20,9 +20,9 @@ export default function Home() {
       <Text style={styles.subtitle}>
         Estamos encantados de tenerte aquí. Explora y disfruta de todas las funcionalidades que hemos preparado para ti.
       </Text>
-      <TouchableOpacity style={styles.button} onPress={irAPrincipal}>
+      <Pressable style={styles.button} onPress={irAPrincipal}>
         <Text style={styles.buttonText}>Iniciar Sesion</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 }

@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import {
   View,
   TextInput,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
   Text,
   Alert,
@@ -21,8 +21,8 @@ const LoginScreen = () => {
 
   // Credenciales simuladas
   const usuarioValido = {
-    correo: 'usuario@ejemplo.com',
-    contrasena: '123456',
+    correo: '1',
+    contrasena: '1',
   };
 
   const iniciarSesion = () => {
@@ -68,12 +68,12 @@ const LoginScreen = () => {
           secureTextEntry
           autoCapitalize="none"
         />
-        <TouchableOpacity style={styles.button} onPress={iniciarSesion}>
+        <Pressable style={styles.button} onPress={iniciarSesion}>
           <Text style={styles.buttonText}>Ingresar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => Alert.alert('Función no implementada')}>
+        </Pressable>
+        <Pressable onPress={() => Alert.alert('Función no implementada')}>
           <Text style={styles.forgotPassword}>¿Olvidaste tu contraseña?</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </LinearGradient>
   );

@@ -1,6 +1,6 @@
 // app/home.tsx
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -9,19 +9,19 @@ export default function Home() {
 
   // Funciones de navegación para los botones del footer
   const goToScreen1 = () => {
-    router.push('/');
+    router.push('/tabs/screen1');
   };
 
   const goToScreen2 = () => {
-    router.push('/');
+    router.push('/tabs/screen2');
   };
 
   const goToScreen3 = () => {
-    router.push('/');
+    router.push('/tabs/screen3');
   };
 
   const goToScreen4 = () => {
-    router.push('/');
+    router.push('/tabs/screen4');
   };
 
   return (
@@ -33,15 +33,15 @@ export default function Home() {
           style={styles.logo}
         />
         <View style={styles.headerButtons}>
-          <TouchableOpacity style={styles.headerButton}>
+          <Pressable style={styles.headerButton}>
             <Ionicons name="menu" size={24} color="#fff" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerButton}>
+          </Pressable>
+          <Pressable style={styles.headerButton}>
             <Ionicons name="notifications" size={24} color="#fff" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.headerButton}>
+          </Pressable>
+          <Pressable style={styles.headerButton}>
             <Ionicons name="ellipsis-vertical" size={24} color="#fff" />
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
 
@@ -53,22 +53,22 @@ export default function Home() {
 
       {/* Footer */}
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerButton} onPress={goToScreen1}>
+        <Pressable style={styles.footerButton} onPress={goToScreen1}>
           <Ionicons name="home" size={24} color="#fff" />
           <Text style={styles.footerButtonText}>Inicio</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton} onPress={goToScreen2}>
+        </Pressable>
+        <Pressable style={styles.footerButton} onPress={goToScreen2}>
           <Ionicons name="search" size={24} color="#fff" />
           <Text style={styles.footerButtonText}>Buscar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton} onPress={goToScreen3}>
+        </Pressable>
+        <Pressable style={styles.footerButton} onPress={goToScreen3}>
           <Ionicons name="heart" size={24} color="#fff" />
           <Text style={styles.footerButtonText}>Favoritos</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.footerButton} onPress={goToScreen4}>
+        </Pressable>
+        <Pressable style={styles.footerButton} onPress={goToScreen4}>
           <Ionicons name="person" size={24} color="#fff" />
           <Text style={styles.footerButtonText}>Perfil</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

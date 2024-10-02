@@ -1,6 +1,6 @@
 // app/(tabs)/index.tsx
 import React, { useContext } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { AuthContext } from '../../contexts/authContext';
 
 const HomeScreen = () => {
@@ -9,9 +9,9 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>¡Bienvenido a la aplicación!</Text>
-      <TouchableOpacity style={styles.button} onPress={signOut}>
+      <Pressable style={styles.button} onPress={signOut}>
         <Text style={styles.buttonText}>Cerrar Sesión</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };
