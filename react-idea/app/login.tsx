@@ -1,5 +1,4 @@
-// app/login.tsx
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react'; 
 import {
   View,
   TextInput,
@@ -10,40 +9,49 @@ import {
   Image,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { AuthContext } from '../contexts/authContext';
 import { LinearGradient } from 'expo-linear-gradient';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase/config'; // Importa tu auth desde la configuración de Firebase
 
 const LoginScreen = () => {
   const [correo, setCorreo] = useState('');
   const [contrasena, setContrasena] = useState('');
-  const { signIn } = useContext(AuthContext);
   const router = useRouter();
 
-  // Credenciales simuladas
-  const usuarioValido = {
-    correo: '1',
-    contrasena: '1',
-  };
-
-  const iniciarSesion = () => {
+  const iniciarSesion = async () => {
     if (!correo || !contrasena) {
       Alert.alert('Campos Vacíos', 'Por favor ingresa correo y contraseña');
       return;
     }
 
-    if (
-      correo === usuarioValido.correo &&
-      contrasena === usuarioValido.contrasena
-    ) {
-      signIn(); // Actualiza el estado de autenticación
-      router.replace('/home');
-    } else {
-      Alert.alert('Error', 'Correo o contraseña incorrectos');
+    try {
+      // Autenticar al usuario con Firebase
+      await signInWithEmailAndPassword(auth, correo, contrasena);
+      router.replace('/home'); // Redirigir al usuario al home después de iniciar sesión
+    } catch (error: unknown) {
+      // Verificar si el error es de Firebase y manejarlo
+      if (error instanceof Error && 'code' in error) {
+        const firebaseError = error as { code: string };
+
+        // Manejar los diferentes tipos de errores
+        switch (firebaseError.code) {
+          case 'auth/wrong-password':
+            Alert.alert('Error', 'La contraseña es incorrecta');
+            break;
+          case 'auth/user-not-found':
+            Alert.alert('Error', 'No existe una cuenta con ese correo electrónico');
+            break;
+          default:
+            Alert.alert('Error', 'Hubo un problema al iniciar sesión. Inténtalo de nuevo');
+        }
+      } else {
+        Alert.alert('Error', 'Ocurrió un error desconocido.');
+      }
     }
   };
 
   return (
-    <LinearGradient colors={[ '#2575fc','#6a11cb',]} style={styles.background}>
+    <LinearGradient colors={['#2575fc', '#6a11cb']} style={styles.background}>
       <View style={styles.container}>
         <Image
           source={require('../assets/images/react-logo.png')}
@@ -70,6 +78,9 @@ const LoginScreen = () => {
         />
         <Pressable style={styles.button} onPress={iniciarSesion}>
           <Text style={styles.buttonText}>Ingresar</Text>
+        </Pressable>
+        <Pressable onPress={() => router.push('/register')}>
+          <Text style={styles.forgotPassword}>¿No tienes una cuenta? Regístrate</Text>
         </Pressable>
         <Pressable onPress={() => Alert.alert('Función no implementada')}>
           <Text style={styles.forgotPassword}>¿Olvidaste tu contraseña?</Text>

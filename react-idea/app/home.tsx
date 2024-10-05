@@ -23,6 +23,10 @@ export default function Home() {
   const goToScreen4 = () => {
     router.push('/tabs/screen4');
   };
+  
+  const goToFacialComparison = () => {
+    router.push('/tabs/facial-comparison');
+  };
 
   return (
     <View style={styles.container}>
@@ -69,6 +73,10 @@ export default function Home() {
           <Ionicons name="person" size={24} color="#fff" />
           <Text style={styles.footerButtonText}>Perfil</Text>
         </Pressable>
+        <Pressable style={styles.footerButton} onPress={goToFacialComparison}>
+        <Ionicons name="camera" size={24} color="#fff" />
+        <Text style={styles.footerButtonText}>Comparar Rostros</Text>
+      </Pressable>
       </View>
     </View>
   );
